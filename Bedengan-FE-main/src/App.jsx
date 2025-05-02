@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from 'react'; // Tambahkan Suspense dan lazy
+import React, { Suspense, lazy } from 'react'; // Suspense dan lazy
 import { Routes, Route } from 'react-router-dom';
-import { ScrollToTop, PrivateRoute, AdminRoute } from './components'; // Komponen utilitas tetap diimport biasa
+import { ScrollToTop, PrivateRoute, AdminRoute } from './components';
 import { ToastContainer } from "react-toastify";
-// import { LandingPage, ... } from './pages'; // Hapus import statis halaman
+// import { LandingPage, ... } from './pages'; // diganti menjadi react lazy
 
 // --- Implementasi Code Splitting untuk Pages ---
 const LandingPage = lazy(() => import('./pages/main/LandingPage'));
@@ -34,25 +34,22 @@ const AddKavling = lazy(() => import('./pages/admin/AddKavling'));
 const UpdateKavling = lazy(() => import('./pages/admin/UpdateKavling'));
 const UpdateOfflineReservation = lazy(() => import('./pages/admin/UpdateOfflineReservation'));
 const PembayaranUpload = lazy(() => import('./pages/pembayaran/PembayaranUpload'));
-// -------------------------------------------------
 
 function App() {
 
-  // Fallback UI bisa berupa spinner atau teks sederhana
+  // Fallback UI
   const pageLoadingFallback = <div>Loading page...</div>;
 
   return (
     <div>
       <ScrollToTop />
-      {/* --- Bungkus Routes dengan Suspense --- */}
+      {/* --- Suspense --- */}
       <Suspense fallback={pageLoadingFallback}>
         <Routes>
-          {/* --- Rute Publik (Contoh) --- */}
-          {/* Rute ini mungkin tidak perlu PrivateRoute jika Masuk/Daftar/Syarat bersifat publik */}
+          {/* --- Rute Publik --- */}
           <Route path="/syarat-dan-ketentuan" element={<SyaratDanKetentuan />} />
           <Route path="/masuk" element={<Masuk />} />
           <Route path="/daftar" element={<Daftar />} />
-          {/* Jika LandingPage bisa diakses tanpa login, pindahkan keluar PrivateRoute */}
           <Route path="/" element={<LandingPage />} />
 
           {/* --- Rute setelah Login/Registrasi Awal --- */}
@@ -62,7 +59,6 @@ function App() {
 
           {/* --- Rute yang Membutuhkan Autentikasi Penuh --- */}
           <Route element={<PrivateRoute requireAuth={true} />}>
-             {/* <Route path="/" element={<LandingPage />} /> Jika landing page butuh auth */}
              <Route path="/reservasi" element={<Reservasi />} />
              <Route path="/kavling" element={<Kavling />} />
              <Route path="/pembayaran" element={<Pembayaran />} />
@@ -78,7 +74,6 @@ function App() {
             <Route path="/admin/reservasi/online" element={<ReservasiOnline />} />
             <Route path="/admin/reservasi/online/detail" element={<OnlineDetail />} />
             <Route path="/admin/reservasi/online/detail-kelompok" element={<OnlineDetailKelompok />} />
-            {/* ... sisa rute admin ... */}
             <Route path="/admin/reservasi/offline" element={<ReservasiOffline />} />
             <Route path="/admin/reservasi/offline/tambah" element={<AddReservasiOffline />} />
             <Route path="/admin/reservasi/offline/update" element={<UpdateOfflineReservation />} />
@@ -94,11 +89,10 @@ function App() {
           </Route>
 
           {/* --- Rute Lain-lain --- */}
-          <Route path="/tes" element={<UpdateKavling />} /> {/* Mungkin ini juga perlu lazy load? */}
+          <Route path="/tes" element={<UpdateKavling />} /> {/* perlu lazy load? */}
           <Route path="/comingsoon" element={<ComingSoon />} />
         </Routes>
       </Suspense>
-      {/* ------------------------------------ */}
       <ToastContainer />
     </div>
   )
