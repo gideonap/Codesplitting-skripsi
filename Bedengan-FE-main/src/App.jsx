@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react'; // Suspense dan lazy
 import { Routes, Route } from 'react-router-dom';
 import { ScrollToTop, PrivateRoute, AdminRoute } from './components';
 import { ToastContainer } from "react-toastify";
-// import { LandingPage, ... } from './pages'; // diganti menjadi react lazy
 
 // --- Implementasi Code Splitting untuk Pages ---
 const LandingPage = lazy(() => import('./pages/main/LandingPage'));
@@ -89,7 +88,7 @@ function App() {
           </Route>
 
           {/* --- Rute Lain-lain --- */}
-          <Route path="/tes" element={<UpdateKavling />} /> {/* perlu lazy load? */}
+          <Route path="/tes" element={<UpdateKavling />} />
           <Route path="/comingsoon" element={<ComingSoon />} />
         </Routes>
       </Suspense>
