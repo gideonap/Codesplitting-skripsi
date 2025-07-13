@@ -248,7 +248,6 @@ const LandingPage = () => {
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.0963541431142!2d112.52960455654726!3d-7.939746304651023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7883de82b88e3b%3A0xef56b8f39f00d6e0!2sBedengan%20Camping%20Ground!5e0!3m2!1sen!2sid!4v1723107890524!5m2!1sen!2sid"
                 className="rounded-lg h-56 lg:h-72 w-[17rem] lg:w-[29rem]"
                 allowFullScreen=""
-                loading="lazy"
                 title="Bedengan Camping Ground Map"
               ></iframe>
               <div className="flex flex-col gap-9">

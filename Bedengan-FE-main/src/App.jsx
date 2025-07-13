@@ -56,7 +56,7 @@ function App() {
              <Route path="/daftar-data-diri" element={<DaftarDataDiri />} />
           </Route>
 
-          {/* --- Rute yang Membutuhkan Autentikasi Penuh --- */}
+          {/* --- Rute yang Membutuhkan Autentikasi --- */}
           <Route element={<PrivateRoute requireAuth={true} />}>
              <Route path="/reservasi" element={<Reservasi />} />
              <Route path="/kavling" element={<Kavling />} />
